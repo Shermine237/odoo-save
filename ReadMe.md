@@ -34,3 +34,13 @@ crontab -e
 ```
 
 ## Récupérer les sauvegardes via PowerShell sur le serveur local
+### Automatiser avec l'Outil de planification de tâches :
+#### Ouvrez l'Outil de planification de tâches.
+#### Créez une nouvelle tâche :
+##### Déclencheur : Hebdomadaire, le jour et l'heure souhaités.
+##### Action :
+###### Programme : powershell.exe
+###### Arguments : 
+```powershell
+-ExecutionPolicy Bypass -File C:\\Scripts\\retrieve_backup.ps1
+```
