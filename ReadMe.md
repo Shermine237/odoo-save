@@ -1,46 +1,58 @@
-# Solution de Sauvegarde Odoo entre Serveur cloud et Serveur Local
+# Odoo Backup Solution between Cloud and Local Servers
 
-## Utilisation du Script backup_odoo.sh sur le serveur cloud
-### Créer le répertoire de sauvegarde :
+## Cloud Server Script (`backup_odoo.sh`)
+
+### Backup Directory Preparation
 
 ```bash
+# Create backup directory
 sudo mkdir -p /backups/odoo
+
+# Set permissions
 sudo chown -R $USER:$USER /backups/odoo
 ```
 
-### Rendre le script exécutable :
+### Script Execution Permissions
 
 ```bash
-chmod +x /chemin/vers/backup_odoo.sh
+# Make script executable
+chmod +x /path/to/backup_odoo.sh
 ```
-### Tester le script :
-#### Exécutez le script manuellement pour vérifier qu'il fonctionne correctement :
+
+### Script Testing
+
+Run the script manually to verify functionality:
 
 ```bash
-/chemin/vers/backup_odoo.sh
+/path/to/backup_odoo.sh
 ```
 
-### Automatiser avec cron :
-#### Ouvrez le fichier crontab :
+### Cron Automation
 
-```bash
-crontab -e
-```
+1. Open crontab:
+   ```bash
+   crontab -e
+   ```
 
-#### Ajoutez la ligne suivante pour exécuter le script tous les dimanches à 3h du matin :
+2. Add scheduling line (runs every Sunday at 3 AM):
+   ```bash
+   0 3 * * 0 /path/to/backup_odoo.sh >> /var/log/odoo_backup.log 2>&1
+   ```
 
-```bash
-0 3 * * 0 /chemin/vers/backup_odoo.sh >> /var/log/odoo_backup.log 2>&1
-```
+## Local Server Backup Retrieval
 
-## Récupérer les sauvegardes via PowerShell sur le serveur local
-### Automatiser avec l'Outil de planification de tâches :
-#### Ouvrez l'Outil de planification de tâches.
-#### Créez une nouvelle tâche :
-##### Déclencheur : Hebdomadaire, le jour et l'heure souhaités.
-##### Action :
-###### Programme : powershell.exe
-###### Arguments : 
-```powershell
--ExecutionPolicy Bypass -File C:\\Scripts\\retrieve_backup.ps1
-```
+### Task Scheduler Configuration
+
+1. Open Task Scheduler
+2. Create New Task
+   - **Trigger**: Weekly schedule
+   - **Action**: 
+     ```powershell
+     powershell.exe -ExecutionPolicy Bypass -File C:\Scripts\retrieve_backup.ps1
+     ```
+
+## Best Practices
+
+- Replace script paths with actual paths
+- Verify file permissions
+- Test backup and retrieval processes thoroughly
